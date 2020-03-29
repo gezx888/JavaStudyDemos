@@ -27,4 +27,22 @@
     <url-pattern>/otherServlet</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>seSomeServlet</servlet-name>
+    <servlet-class>session.SomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>seSomeServlet</servlet-name>
+    <url-pattern>/seSomeServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>seOtherServlet</servlet-name>
+    <servlet-class>session.OtherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>seOtherServlet</servlet-name>
+    <url-pattern>/seOtherServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>
