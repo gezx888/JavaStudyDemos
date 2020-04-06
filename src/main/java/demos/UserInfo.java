@@ -2,6 +2,8 @@ package demos;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Describe:
  * @Author: Gezx
@@ -11,4 +13,5 @@ import lombok.Data;
 public class UserInfo {
     private String username;
     private String password;
+    private List<String> interests;
 }
