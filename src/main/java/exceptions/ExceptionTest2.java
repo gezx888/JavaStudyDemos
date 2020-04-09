@@ -1,5 +1,7 @@
 package exceptions;
 
+import org.junit.Test;
+
 /**
  * @Describe: 主要用来测试自定义异常
  * @Author: Gezx
@@ -25,4 +27,36 @@ public class ExceptionTest2 {
             System.out.println("程序发生了其他的异常"); // 输出提示信息
         }
     }
+
+    /**
+     * 下面两个方法结合起来看：测试关于finally语句块的一个知识点
+     */
+    @Test
+    public void test01(){
+        int i = method1();
+        System.out.println(i);  // 10
+    }
+    private int method1(){
+        int i = 0;
+       /* try{
+            i = 10;
+            return i;
+        }finally {
+            i++;
+            System.out.println(i);
+        }*/
+        /**
+         * 以上代码执行原理相当于在try语句块中弄了一个临时变量temp，在执行finally语句块之前
+         * 将i的值赋值给临时变量temp然后通过return语句返回给调用方法。
+         */
+        try{
+            i = 10;
+            int temp = i;
+            return temp;
+        }finally {
+            i++;
+            System.out.println(i);  // 11
+        }
+    }
+
 }
