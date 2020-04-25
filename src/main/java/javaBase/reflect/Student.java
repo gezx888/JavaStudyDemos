@@ -1,4 +1,4 @@
-package reflect;
+package javaBase.reflect;
 
 import lombok.Data;
 

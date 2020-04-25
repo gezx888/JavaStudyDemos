@@ -1,4 +1,4 @@
-package thread;
+package javaBase.thread;
 
 /**
  * @description: 通过实现Runnable接口并实现run方法创建线程

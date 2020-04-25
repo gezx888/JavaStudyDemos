@@ -1,4 +1,4 @@
-package exceptions;
+package javaBase.exceptions;
 
 /**
  * @Describe: 创建自定义异常

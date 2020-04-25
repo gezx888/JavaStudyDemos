@@ -1,4 +1,4 @@
-package exceptions;
+package javaBase.exceptions;
 
 import org.junit.Test;
 

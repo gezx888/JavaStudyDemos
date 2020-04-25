@@ -1,4 +1,4 @@
-package reflect;
+package javaBase.reflect;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class ReflectTest {
         System.out.println(studentClass.getName());
 
         // 第三种方式获取Class对象
-        Class<?> aClass = Class.forName("reflect.Student"); // 此字符串参数为全限定名，真实路径，带包名
+        Class<?> aClass = Class.forName("javaBase.reflect.Student"); // 此字符串参数为全限定名，真实路径，带包名
         System.out.println(aClass.getName());
         System.out.println(stuClass == studentClass);
         System.out.println(studentClass == aClass);

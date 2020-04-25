@@ -1,4 +1,4 @@
-package thread;
+package javaBase.thread;
 
 /**
  * @description: 通过继承线程类Thread并重写run方法创建线程

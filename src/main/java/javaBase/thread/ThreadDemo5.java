@@ -1,4 +1,4 @@
-package thread;
+package javaBase.thread;
 
 /**
  * @author gezx

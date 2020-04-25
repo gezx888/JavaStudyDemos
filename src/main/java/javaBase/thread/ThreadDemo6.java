@@ -1,4 +1,4 @@
-package thread;
+package javaBase.thread;
 
 /**
  * @description: 本类主要演示死锁的形成

@@ -1,4 +1,4 @@
-package thread;
+package javaBase.thread;
 
 /**
  * @description: 这个类主要用来模拟多个用户(线程)共享同一个账号，取钱时候没有采取同步机制时候产生的数据安全问题
