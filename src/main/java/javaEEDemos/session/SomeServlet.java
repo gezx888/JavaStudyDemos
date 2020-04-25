@@ -1,4 +1,4 @@
-package session;
+package javaEEDemos.session;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

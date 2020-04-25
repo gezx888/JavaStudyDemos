@@ -11,7 +11,7 @@
   <!-- 以下代码注册servlet 相当于servlet类中的注解 @WebServlet(name = "/SomeServlet") -->
   <servlet>
     <servlet-name>someServlet</servlet-name>
-    <servlet-class>cookies.SomeServlet</servlet-class>
+    <servlet-class>javaEEDemos.cookies.SomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>someServlet</servlet-name>
@@ -20,7 +20,7 @@
 
   <servlet>
     <servlet-name>otherServlet</servlet-name>
-    <servlet-class>cookies.OtherServlet</servlet-class>
+    <servlet-class>javaEEDemos.cookies.OtherServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>otherServlet</servlet-name>
@@ -29,7 +29,7 @@
 
   <servlet>
     <servlet-name>seSomeServlet</servlet-name>
-    <servlet-class>session.SomeServlet</servlet-class>
+    <servlet-class>javaEEDemos.session.SomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>seSomeServlet</servlet-name>
@@ -38,7 +38,7 @@
 
   <servlet>
     <servlet-name>seOtherServlet</servlet-name>
-    <servlet-class>session.OtherServlet</servlet-class>
+    <servlet-class>javaEEDemos.session.OtherServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>seOtherServlet</servlet-name>
