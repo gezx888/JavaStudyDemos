@@ -16,7 +16,7 @@ public class StringTest {
     }
 
     /**
-     * 替换空格：将给定字符串中的空格全部替换掉
+     * case5：替换空格：将给定字符串中的空格全部替换掉
      * @param str
      * @return
      */
@@ -37,5 +37,26 @@ public class StringTest {
         return new String(charArray,0,size);
      //   return str.replaceAll(" ","%20" );  方法二：使用API全部替换
     }
+
+    /**
+     * case15：二进制中1的个数统计
+     *
+     * 思路：巧用 n & n-1 运算，因为每一次与n-1进行与操作的时候，都会将 n 的最右边的 1 消去变成 0；其余位没有改变！
+     * 所以循环多少次就有多少个 1
+     *
+     * @param n
+     * @return
+     */
+    private int hammingWeight(int n){
+        int res = 0;
+        while(n!=0){
+            n &= n-1;  // 每一次与n-1进行与操作的时候，都会将 n 的最右边的 1 消去变成 0；其余位没有改变！
+            res++;
+        }
+        return res;
+    }
+
+
+
 
 }
