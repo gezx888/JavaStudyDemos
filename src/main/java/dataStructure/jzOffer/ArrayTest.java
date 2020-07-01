@@ -153,9 +153,9 @@ public class ArrayTest {
      * 讲两个思路：
      * 方法一：简单粗暴法：定义一个临时数组，用来按照题目要求存好元素，然后直接返回
      *
-     * 方法二：双指针法：分别指向数组前后两端，左指针向右移直到遇到偶数停止下来，等待
+     * 方法二：双指针法：分别指向数组前后两端，左指针向右移直到遇到偶数停止下来，等待；
      * 右指针向左移动直到遇到奇数，这个时候将两个指针指向的两个数互换位置，最后直到左右指针
-     * 相等时 left == right 是退出循环，返回数组即可！
+     * 相等时 left == right 时退出循环，返回数组即可！
      *
      * 其实还有方法三：使用快慢指针法：
      * 一开始快慢指针都指向数组最低位元素，然后使用慢指针slow存放下一个奇数即将要存放的位置，快指针fast依次遍历数组元素，
@@ -200,6 +200,31 @@ public class ArrayTest {
                 nums[right] = nums[left];
                 nums[left] = temp;
             }
+        }
+        return nums;
+    }
+
+    /**
+     * 方法三: 注意当为奇数且快慢指针相等的时候，无需交换，但需要移动慢指针，因为慢指针存放的是下一个即将要存的奇数位置
+     *             所以需要移动慢指针！
+     * @param nums
+     * @return
+     */
+    private int[] exchange3(int[] nums){
+        if(nums==null || nums.length==0){
+            return nums;
+        }
+        int fast=0,slow=0;
+        while(fast<nums.length){
+            if((nums[fast]&1)==1){
+                if(fast!=slow){
+                    int temp = nums[slow];
+                    nums[slow] = nums[fast];
+                    nums[fast] = temp;
+                }
+                slow++;
+            }
+            fast++;
         }
         return nums;
     }
