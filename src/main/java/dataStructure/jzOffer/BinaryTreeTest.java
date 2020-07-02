@@ -35,7 +35,7 @@ public class BinaryTreeTest {
      *
      * @return
      */
-    // 方法一：递归解法
+    // 方法一：递归解法（DFS —— 深度优先搜索）
     private TreeNode mirrorTree(TreeNode root){
         if(root==null){
             return null;
@@ -45,7 +45,7 @@ public class BinaryTreeTest {
         root.right = mirrorTree(tem);
         return root;
     }
-    // 方法二：利用外部空间 栈
+    // 方法二：利用外部空间 栈 （BFS —— 广度优先搜索）
     private TreeNode mirrorTree2(TreeNode root){
         if(root==null) return null;
         Stack<TreeNode> stack = new Stack<>();
