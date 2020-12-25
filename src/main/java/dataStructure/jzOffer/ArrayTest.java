@@ -2,8 +2,7 @@ package dataStructure.jzOffer;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 该类写的是剑指offer与数组相关的一些面试题
@@ -228,6 +227,87 @@ public class ArrayTest {
         }
         return nums;
     }
+
+    /**
+     * case39: 数组中数字超过一半的数：众数
+     * 方法一：常规思路（暴力求解）：通过借助HashMap来统计数组中各个数出现的次数，超过数组长度一半的数则为众数
+     *
+     * 方法二：摩尔投票法（也是本题最优解法：空间复杂度为O(1) 时间复杂度为O(n)）：循环遍历数组每个数：每次进入
+     * 一次循环的时候：将当前数与已经保存的众数比较，相等时将保存票数的变量加1，否则减1，当票数为0时，需要将当前数保存为众数
+     * 最后依据题目要求判断，超过数组一半（即是进行验证）直接返回最后保存的众数即可
+     *
+     * 方法三：借鉴快速排序算法：排好序以后，众数肯定会出现在中间位置的数
+     *
+     * @return
+     */
+    // 方法一：暴力求解，依次遍历但是可以在一次遍历过程中进行判断
+    private int majorityElement(int[] nums){
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int count = nums.length/2;
+        for(int num : nums){
+            if(map.get(num)!=null){
+                map.put(num,map.get(num)+1);
+            }else {
+                map.put(num,1);
+            }
+            if(map.get(num)>count) return num;
+        }
+        return 0;
+    }
+
+    // 方法二：摩尔投票法
+    private int majorityElement2(int[] nums){
+        int result = nums[0],vote=0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if(vote==0) result = nums[i];
+            if(nums[i] == result){
+                vote++;
+            }else {
+                vote--;
+            }
+        }
+        // 对最后保存的数result出现的次数是否大于数组长度一半进行验证
+        for(int num : nums){
+            if(num == result) count++;
+        }
+        return (count>nums.length/2)?result:0;
+    }
+
+    /**
+     *case40：求数组中的最小的K个数（TopK 问题一般需要联想到 快速排序 算法；里面有一轮排序就是一次切分：一次切分完了之后可以返回一个
+     *          基准数的下标，并且左边数都比他小，右边数都比他大）
+     * 方法一：依照快排思想；求到最小K个数的下标k-1，然后直接返回数组前k个数就行
+     *
+     * 方法二：使用一个大小为k的容器，容器size<k时，直接往里面加数，否则将容器里面最大的数与当前遍历的元素比较，大，就换成当前元素
+     *
+     */
+    // 方法一：
+    private int[] getLeastNumbers(int[] nums,int k){
+        return null;
+    }
+
+
+    // 方法二： res.indexOf(value):返回的是value值得下标
+    private ArrayList<Integer> getLeastNumbers2(int[] nums,int k){
+        if(nums.length<=0 || k<=0){
+            return null;
+        }
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if(res.size()<=k){
+                res.add(nums[i]);
+            }else {
+                Integer max = Collections.max(res);
+                if(max >nums[i]){
+                    res.set(res.indexOf(max),nums[i]);
+                }
+            }
+        }
+        return res;
+    }
+
+
 
 
 
