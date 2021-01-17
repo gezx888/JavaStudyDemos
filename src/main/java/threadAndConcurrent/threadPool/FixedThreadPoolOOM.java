@@ -5,7 +5,8 @@ import java.util.concurrent.Executors;
 
 /**
  *
- * @description: 1.0
+ * @description: 此类用来演示线程池工作的时候可能发生内存溢出的情况：通过新建一个只有单个线程的线程池去执行任务
+ *                  然后每个任务都是一直在休眠很难完成，这样就将造成内存溢出
  * @author: gezx
  * @date: 2020/12/27 18:39
  */
