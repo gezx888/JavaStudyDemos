@@ -13,8 +13,8 @@ public class LockInterruptibly implements Runnable{
 
     public static void main(String[] args) {
         LockInterruptibly lockInterruptibly = new LockInterruptibly();
-        Thread thread1 = new Thread(lockInterruptibly);
-        Thread thread2 = new Thread(lockInterruptibly);
+        Thread thread1 = new Thread(lockInterruptibly,"Thread-1");
+        Thread thread2 = new Thread(lockInterruptibly,"Thread-2");
         thread1.start();
         thread2.start();
 

@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * @description: 用tryLock() 方法可以用来避免死锁
+ * @description: 用tryLock() 方法可以用来避免死锁 从字面意思理解可知：没有得到锁就会先释放
  * @author: gezx
  * @date: 2021/1/3 16:51
  */
