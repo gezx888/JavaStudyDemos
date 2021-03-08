@@ -119,26 +119,53 @@ public class ArrayTest {
      * 两边同时反向移动指针，当出现nums[left]>nums[left+1] 或者 nums[right] < nums[right-1]的时候
      * nums[left+1] 或者 nums[right]便是数组中的最小值
      *
-     * @param nums
+     * 思路三：二分查找法：二分查找的一种延伸应用：就是只要进行比较之后能判断出答案在中值的某一侧既可以采用二分查找进行
+     * 本题难点需要确定 中值 与谁、什么进行比较（一般有目标值的时候就会和目标值进行比较，没有的话一般和端点进行比较，但需要确认和
+     * 哪边端点进行比较 ；同时本题需要分析出有三种情况）
+     *
+     * @param array
      * @return
      */
-    private int minArray(int[] nums){
-        int length = nums.length;
+    private int minArray(int[] array){
+        int length = array.length;
         if(length==0){
             return -1;
         }
         int left=0,right=length-1;
-        int min = nums[0];
+        int min = array[0];
         while (left<right){
-            if(nums[left]>nums[left+1] || nums[right]<nums[right-1]){
-                min = Math.min(min, nums[left + 1]);
-                min = Math.min(min, nums[right]);
+            if(array[left]>array[left+1] || array[right]<array[right-1]){
+                min = Math.min(min, array[left + 1]);
+                min = Math.min(min, array[right]);
                 break;
             }
             left++;
             right--;
         }
         return min;
+    }
+
+    // 方法三：二分查找思路
+    private int minArray3(int[] nums){
+        int length = nums.length;
+        if(length == 0){
+            return -1;
+        }
+        int first = 0, last = length-1;
+        int mid = (first + last) / 2;
+        while (first < last){
+            if(nums[first] < nums[last]){
+                return nums[first];
+            }
+            if(nums[mid] > nums[last]){
+                first = mid + 1;
+            }else if(nums[mid] < nums[last]){
+                last = mid;
+            }else {
+                --last;
+            }
+        }
+        return nums[first];
     }
 
     /**
@@ -148,7 +175,7 @@ public class ArrayTest {
      */
 
     /**
-     * case21：调整数组的顺序：是奇数位于偶数的前面
+     * case21：调整数组的顺序：是奇数位于偶数的前面 (对于原来数组中的奇数、偶数的相对位置没有要求的时候可以用下面的方法)
      * 讲两个思路：
      * 方法一：简单粗暴法：定义一个临时数组，用来按照题目要求存好元素，然后直接返回
      *
@@ -162,7 +189,7 @@ public class ArrayTest {
      *
      * @return
      */
-    // 方法一：
+    // 方法一： 不满足 原来数组中的奇数、偶数的相对位置不变 的要求
     private int[] exchange(int[] nums){
         if(nums==null || nums.length==0){
             return nums;
@@ -178,7 +205,7 @@ public class ArrayTest {
         }
         return temp;
     }
-    // 方法二;
+    // 方法二; 不满足 原来数组中的奇数、偶数的相对位置不变 的要求
     private int[] exchange2(int[] nums){
         if(nums==null || nums.length==0){
             return nums;
@@ -205,7 +232,7 @@ public class ArrayTest {
 
     /**
      * 方法三: 注意当为奇数且快慢指针相等的时候，无需交换，但需要移动慢指针，因为慢指针存放的是下一个即将要存的奇数位置
-     *             所以需要移动慢指针！
+     *             所以需要移动慢指针！  同样不满足  原来数组中的奇数、偶数的相对位置不变 的要求
      * @param nums
      * @return
      */
@@ -228,6 +255,35 @@ public class ArrayTest {
         return nums;
     }
 
+    /**
+     *  牛客网剑指offer case-13：调整数组的顺序：是奇数位于偶数的前面 (且原来数组中的奇数、偶数的相对位置要求不能变化)
+     *
+     *  采用插入排序的思想：用一个变量记录下奇数已经是有序区的下标的位置，然后依次向往遍历数组，偶数跳过，奇数的话 则 "进行插入排序"，
+     *  然后有序区下标加 1
+     */
+
+    public int[] reOrderArray(int[] array){
+        if(array == null || array.length == 0){
+            return array;
+        }
+        int j = 0;
+        int temp = 0;
+        for (int i = 0; i < array.length; i++) {
+            temp = array[i];
+            if(array[i] % 2 ==0){
+                continue;
+            }else {
+                int k =  i;
+                while (k > j){
+                    array[k] = array[k - 1];
+                    k--;
+                }
+                array[k] = temp;
+                j++;
+            }
+        }
+        return array;
+    }
     /**
      * case39: 数组中数字超过一半的数：众数
      * 方法一：常规思路（暴力求解）：通过借助HashMap来统计数组中各个数出现的次数，超过数组长度一半的数则为众数
