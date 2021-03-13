@@ -87,7 +87,7 @@ public class LinkListTest {
         ListNode former=head,latter=head;
         // 先让前指针向前走k步
         for (int i = 0; i < k; i++) {
-             if(former==null)return null;   // 考虑特殊情况：k大于链表长度
+            if(former==null)return null;   // 考虑特殊情况：k大于链表长度
             former = former.next;
         }
         while (former!=null){
@@ -107,7 +107,7 @@ public class LinkListTest {
      *  方法二：双指针迭代法：1、首先初始化两个指针，一个（cur）指向头结点head，另一个（pre）指向null；
      *                   2、然后通过cur依次遍历链表，每次迭代都将cur的next指向pre， 通过这样来实现局部反转，局部反转后cur pre分别同时前进一位；
      *                   循环，一直直至cur到达链表尾部。
-     *                   3、重要：在每一次迭代的时候都需要通过一个临时temp节点在最开始保留当前节点cur的next节点！
+     *                   3、重要：在每一次迭代的时候都需要通过一个临时temp节点在最开始保留当前节点cur的next节点！这样以达到丢失节点的目的，实现每一个链表节点的反转
      *
      *  方法三：递归解法（见leetCode官网题解）
      *

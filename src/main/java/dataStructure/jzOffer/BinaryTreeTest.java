@@ -1,6 +1,8 @@
 package dataStructure.jzOffer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -19,6 +21,34 @@ public class BinaryTreeTest {
         TreeNode(int x){
             val = x;
         }
+    }
+
+    /**
+     剑指offer case17：树的子结构：输入两颗树A B，判断B是否为A的子结构（约定空树不是任何树的子结构）
+     算法思路：两个方法：一个方法负责B是否是A的子结构，另外一个方法负责匹配A是否是以B节点开始的子结构
+     算法步骤：（1）第一个方法看A树当前节点是否是以节点B开始的子结构，否则向B的左右孩子去寻找
+     （2）第二个方法看传入的A树的当前节点是否和B相等，且左右孩子也完美匹配
+     * @description:
+     * @author: gezx
+     * @date: 2021/3/9
+     */
+    public boolean HasSubtree(TreeNode root1, TreeNode root2){
+        if(root1 == null || root2 == null){
+            return false;
+        }
+        return findSubtree(root1,root2) || HasSubtree(root1.left,root2) || HasSubtree(root1.right,root2);
+    }
+
+    private boolean findSubtree(TreeNode root1, TreeNode root2) {
+        // root2 为空说明以上都符合
+        if(root2 == null){
+            return true;
+        }
+        // root2不为空并且root1为空则说明不匹配
+        if(root1 == null){
+            return false;
+        }
+        return root1.val == root2.val && findSubtree(root1.left,root2.left) && findSubtree(root1.right,root2.right);
     }
 
     /**
@@ -114,13 +144,13 @@ public class BinaryTreeTest {
         int res = 0;
         queue.add(root);
         while (!queue.isEmpty()){
-           tem = new LinkedList<>();
-           for(TreeNode node : queue){
-               if(node.left!=null) tem.add(node.left);
-               if(node.right!=null) tem.add(node.right);
-           }
-           queue = tem;
-           res++;
+            tem = new LinkedList<>();
+            for(TreeNode node : queue){
+                if(node.left!=null) tem.add(node.left);
+                if(node.right!=null) tem.add(node.right);
+            }
+            queue = tem;
+            res++;
         }
         return res;
     }
@@ -154,5 +184,73 @@ public class BinaryTreeTest {
         if(right==-1) return -1;
         return Math.abs(left-right) < 2?Math.max(left,right)+1:-1;
     }
+
+    /**
+     剑指offer case22 从上往下打印二叉树：其实就是二叉树的=广度优先遍历，同一层的节点按照从左到右的顺序输出
+     这样的遍历一般需要借助外部数据结构实现，比较常见的就是队列 Queue来实现先进先出的目的
+     * @description:
+     * @author: gezx
+     * @date: 2021/3/9
+     */
+    public ArrayList<Integer> printFromTopToBottom(TreeNode root){
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+        // 队列queue用来保存当前遍历到了哪个节点，注意某一个节点的左右子节点需要一次性进行入队
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        // 只要队列不为空，说明还有节点，说明还没有遍历完，继续
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+            result.add(node.val);
+            if(node.left != null){
+                queue.offer(node.left);
+            }
+            if(node.right != null){
+                queue.offer(node.right);
+            }
+        }
+        return result;
+    }
+
+    /**
+     剑指offer case23：二叉搜索树（二叉排序树 / 二叉查找树）的后序遍历序列：输入一个序列数组，判断该数组是否是二叉搜索树的后序遍历序列
+     * @description:            解题思路：依据二叉查找树的后序遍历数组，可以知道：二叉树查找树的根节点为数组的最后一个数
+     *                      条件（1）从头开始遍历序列数组，找到第一个比最后一个数大的数，则以该节点为分界点，左边为左子树，此时已经能保证其都比根节点小
+     *                      条件（2）分界点右边的序列为 右子树，需要循环遍历保证右边的每一个数都比根节点大（否则不满足条件返回false退出）
+     *                      之后采用递归算法判断分界点 左右子树情况
+     * @return:
+     * @author: gezx
+     * @date: 2021/3/9
+     */
+    public boolean VerifySquenceOfBST(int [] sequence) {
+        if(sequence==null ||sequence.length == 0){
+            return false;
+        }
+        return verify(sequence,0,sequence.length-1);
+    }
+
+    private boolean verify(int[] sequence, int start, int end) {
+        if(start >= end){
+            return true;
+        }
+        int root = sequence[end];   // 拿到当前序列的根节点
+        int i = start;
+        for (; i < sequence.length; i++) {
+            if(sequence[i] > root){
+                break;
+            }
+        }
+        int j = i;
+        for (; j < sequence.length; j++) {
+            if(sequence[j] < root){
+                return false;
+            }
+        }
+        return verify(sequence,0,i-1) && verify(sequence,i,end-1);
+    }
+
+
 
 }
