@@ -251,6 +251,41 @@ public class BinaryTreeTest {
         return verify(sequence,0,i-1) && verify(sequence,i,end-1);
     }
 
+    /**
+     * 剑指offer case59：按之字型打印二叉树：请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，
+     * 第三行按照从左到右的顺序打印，其他行以此类推
+     */
+    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(pRoot == null)
+            return result;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(pRoot);
+        boolean reverse = false;     // 是否需要反转的标记
+        TreeNode node;
+        while(queue.size() != 0){
+            int size = queue.size();        // 这行代码很关键不能少
+            ArrayList<Integer> nodeVal = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                node = queue.poll();
+                if(node == null){
+                    continue;
+                }
+                if(!reverse){
+                    nodeVal.add(node.val);    // 往顺序表的结尾添加元素
+                }else{
+                    nodeVal.add(0,node.val);   // 往顺序表的第一个位置添加元素,既可以达到自动逆序顺出该层节点的目的
+                }
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+            if(nodeVal.size()>0){
+                result.add(nodeVal);
+            }
+            reverse = !reverse;
+        }
+        return result;
+    }
 
 
 }

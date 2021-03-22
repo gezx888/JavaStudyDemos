@@ -364,6 +364,34 @@ public class ArrayTest {
         return res;
     }
 
+    /**
+     * 剑指offer case50： 数组中的重复数字：返回数组中任一一个重复的数字，没有重复的则返回-1
+     *
+     * 思路： 利用set的不可重复性：不包含则进行添加，否则直接返回该数字；利用map解决
+     *
+     */
+    public int duplicate (int[] numbers) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < numbers.length; i++) {
+            if(set.contains(numbers[i])){
+                return numbers[i];
+            }else{
+                set.add(numbers[i]);
+            }
+        }
+        return -1;
+    }
+    public int duplicate2 (int[] numbers) {
+        Map<Integer,Integer> map = new HashMap<>();
+        for(Integer num : numbers){
+            if(map.get(num)==null){
+                map.put(num,num);
+            }else{
+                return num;
+            }
+        }
+        return -1;
+    }
 
 
 
