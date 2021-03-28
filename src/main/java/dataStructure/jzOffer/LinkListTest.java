@@ -2,6 +2,8 @@ package dataStructure.jzOffer;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -87,7 +89,7 @@ public class LinkListTest {
         ListNode former=head,latter=head;
         // 先让前指针向前走k步
         for (int i = 0; i < k; i++) {
-             if(former==null)return null;   // 考虑特殊情况：k大于链表长度
+            if(former==null)return null;   // 考虑特殊情况：k大于链表长度
             former = former.next;
         }
         while (former!=null){
@@ -178,6 +180,41 @@ public class LinkListTest {
         }
     }
 
+    /**
+     * 剑指offer case46：圆圈中最后剩下的数
+     *    思路一：约瑟夫环问题：使用数学公式递推法  重要点：（1）最后剩下的数的编号肯定为0；（2）递推公式：f(n,m) = (f(n-1,m) + m) % n;
+     *
+     *    思路二：链表模拟  每下一次删除的位置标号为：前一次的坐标位置 + 移动标尺 再求余得到  ps：当起始标号从0开始索引时，应该是加上 m-1
+     */
+
+    // 思路二：约瑟夫环问题
+    public int LastRemaining_Solution(int n, int m) {
+        if(n<1 || m<1){
+            return -1;
+        }
+        int pos = 0;    //最终活下来的那个人的坐标位置肯定是会为0的
+        for (int i = 2; i <= n; i++) {
+            pos = (pos + m) % i;            // 递推公式
+        }
+        return pos;
+    }
+
+    // 思路二：链表模拟
+    public int LastRemaining_Solution2(int n, int m) {
+        if(n<1 || m<1){
+            return -1;
+        }
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(i);
+        }
+        int p = 0;
+        while(list.size()>1){
+            p = (p + m-1) % list.size();
+            list.remove(p);
+        }
+        return list.get(0);
+    }
 
 
 }

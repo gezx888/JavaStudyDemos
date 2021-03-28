@@ -25,9 +25,9 @@ public class BinaryTreeTest {
 
     /**
      剑指offer case17：树的子结构：输入两颗树A B，判断B是否为A的子结构（约定空树不是任何树的子结构）
-                算法思路：两个方法：一个方法负责B是否是A的子结构，另外一个方法负责匹配A是否是以B节点开始的子结构
-                算法步骤：（1）第一个方法看A树当前节点是否是以节点B开始的子结构，否则向B的左右孩子去寻找
-                        （2）第二个方法看传入的A树的当前节点是否和B相等，且左右孩子也完美匹配
+     算法思路：两个方法：一个方法负责B是否是A的子结构，另外一个方法负责匹配A是否是以B节点开始的子结构
+     算法步骤：（1）第一个方法看A树当前节点是否是以节点B开始的子结构，否则向B的左右孩子去寻找
+     （2）第二个方法看传入的A树的当前节点是否和B相等，且左右孩子也完美匹配
      * @description:
      * @author: gezx
      * @date: 2021/3/9
@@ -144,13 +144,13 @@ public class BinaryTreeTest {
         int res = 0;
         queue.add(root);
         while (!queue.isEmpty()){
-           tem = new LinkedList<>();
-           for(TreeNode node : queue){
-               if(node.left!=null) tem.add(node.left);
-               if(node.right!=null) tem.add(node.right);
-           }
-           queue = tem;
-           res++;
+            tem = new LinkedList<>();
+            for(TreeNode node : queue){
+                if(node.left!=null) tem.add(node.left);
+                if(node.right!=null) tem.add(node.right);
+            }
+            queue = tem;
+            res++;
         }
         return res;
     }
@@ -186,8 +186,8 @@ public class BinaryTreeTest {
     }
 
     /**
-        剑指offer case22 从上往下打印二叉树：其实就是二叉树的=广度优先遍历，同一层的节点按照从左到右的顺序输出
-                            这样的遍历一般需要借助外部数据结构实现，比较常见的就是队列 Queue来实现先进先出的目的
+     剑指offer case22 从上往下打印二叉树：其实就是二叉树的=广度优先遍历，同一层的节点按照从左到右的顺序输出
+     这样的遍历一般需要借助外部数据结构实现，比较常见的就是队列 Queue来实现先进先出的目的
      * @description:
      * @author: gezx
      * @date: 2021/3/9
@@ -215,7 +215,7 @@ public class BinaryTreeTest {
     }
 
     /**
-         剑指offer case23：二叉搜索树（二叉排序树 / 二叉查找树）的后序遍历序列：输入一个序列数组，判断该数组是否是二叉搜索树的后序遍历序列
+     剑指offer case23：二叉搜索树（二叉排序树 / 二叉查找树）的后序遍历序列：输入一个序列数组，判断该数组是否是二叉搜索树的后序遍历序列
      * @description:            解题思路：依据二叉查找树的后序遍历数组，可以知道：二叉树查找树的根节点为数组的最后一个数
      *                      条件（1）从头开始遍历序列数组，找到第一个比最后一个数大的数，则以该节点为分界点，左边为左子树，此时已经能保证其都比根节点小
      *                      条件（2）分界点右边的序列为 右子树，需要循环遍历保证右边的每一个数都比根节点大（否则不满足条件返回false退出）
@@ -251,6 +251,41 @@ public class BinaryTreeTest {
         return verify(sequence,0,i-1) && verify(sequence,i,end-1);
     }
 
+    /**
+     * 剑指offer case59：按之字型打印二叉树：请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，
+     * 第三行按照从左到右的顺序打印，其他行以此类推
+     */
+    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        if(pRoot == null)
+            return result;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(pRoot);
+        boolean reverse = false;     // 是否需要反转的标记
+        TreeNode node;
+        while(queue.size() != 0){
+            int size = queue.size();        // 这行代码很关键不能少
+            ArrayList<Integer> nodeVal = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                node = queue.poll();
+                if(node == null){
+                    continue;
+                }
+                if(!reverse){
+                    nodeVal.add(node.val);    // 往顺序表的结尾添加元素
+                }else{
+                    nodeVal.add(0,node.val);   // 往顺序表的第一个位置添加元素,既可以达到自动逆序顺出该层节点的目的
+                }
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+            if(nodeVal.size()>0){
+                result.add(nodeVal);
+            }
+            reverse = !reverse;
+        }
+        return result;
+    }
 
 
 }
