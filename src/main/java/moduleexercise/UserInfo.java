@@ -1,4 +1,4 @@
-package demos;
+package moduleexercise;
 
 import lombok.Data;
 

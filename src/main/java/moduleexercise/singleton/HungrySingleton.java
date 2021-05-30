@@ -1,4 +1,4 @@
-package demos.singleton;
+package moduleexercise.singleton;
 
 /**
  * @description:    饿汉式单例模式

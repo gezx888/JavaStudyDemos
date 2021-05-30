@@ -1,4 +1,4 @@
-package demos.singleton;
+package moduleexercise.singleton;
 
 /**
  * @description:    双重校验锁型单例模式

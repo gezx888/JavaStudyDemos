@@ -1,4 +1,4 @@
-package demos;
+package moduleexercise;
 
 import net.sf.json.JSONObject;
 import org.junit.Test;

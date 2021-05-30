@@ -1,4 +1,4 @@
-package demos;
+package moduleexercise;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;

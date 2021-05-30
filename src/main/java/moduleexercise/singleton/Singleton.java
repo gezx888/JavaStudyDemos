@@ -1,4 +1,4 @@
-package demos.singleton;
+package moduleexercise.singleton;
 
 /**
  * @description:  懒汉式单例模式 —— 线程不安全 ( 可以通过加 volatile synchronized 关键字达到线程安全)
